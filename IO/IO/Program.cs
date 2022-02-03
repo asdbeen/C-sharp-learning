@@ -271,6 +271,20 @@ class Program
 
         PrintACL(filesec.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount)));
 
+        System.Security.AccessControl.FileSystemAccessRule rule = new System.Security.AccessControl.FileSystemAccessRule
+            (
+                new System.Security.Principal.NTAccount(@"dogStudio\Administrator"),
+                System.Security.AccessControl.FileSystemRights.Delete,
+                System.Security.AccessControl.AccessControlType.Allow
+            );
+
+        filesec.AddAccessRule(rule);
+        PrintACL(filesec.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount)));
+
+        filesec.RemoveAccessRule(rule);
+        PrintACL(filesec.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount)));
+        file.Dispose();
+        Console.Read();
         #endregion
     }
 
