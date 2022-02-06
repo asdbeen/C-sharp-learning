@@ -1,0 +1,61 @@
+﻿<Window x:Class="RelativeSource.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RelativeSource"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid  Margin="0,0,-0.4,-59">
+        <!-- Mode Self -->
+        <!-- <TextBox Name="txt1" Background="blue" Width="200" Height="{Binding ElementName=txt1,Path=Width}"></TextBox>-->
+        <!-- <TextBox  Background="blue" Width="100" Height="{Binding RelativeSource={RelativeSource self},Path=Width}"></TextBox>-->
+
+        <!-- Mode FindAncestor -->
+
+        <!--<Border Padding="30" Name="GreatGrandParentBorder" Background="Black">
+            <Border Padding="30" Name="GrandParentBorder" Background="LightBlue">
+                <Border Padding="30" Name="ParentBorder" Background="PaleVioletRed">
+
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Padding="20" Background="MintCream" FontSize="30" 
+                               Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Border},AncestorLevel=2},Path=Name}"> 
+                        
+                    </TextBlock>
+                    
+                </Border>
+            </Border>
+        </Border> -->
+        
+        <!-- Mode TemplatedParent-->
+        <!--<Button Content="MyButton" Background="Black">
+            
+            <Button.Template>
+                <ControlTemplate>
+                    <Ellipse Fill="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Background}"></Ellipse>
+                </ControlTemplate>
+            </Button.Template>
+            
+        </Button>-->
+
+        <!-- Mode PreviousData-->
+        <ListBox ItemsSource="{Binding}" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal">
+                    </StackPanel>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBox Height="{Binding Data}" Width="30" Text="{Binding Data}"></TextBox>
+                        <Label Content="{Binding RelativeSource={RelativeSource PreviousData},Path=Data}"></Label>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            
+        </ListBox>
+    </Grid>
+</Window>
